@@ -1,0 +1,52 @@
+-- ================================================
+-- PROYECTO: Análisis de Tráfico Portuario Colombia
+-- FUENTE: datos.gov.co - Superintendencia de Transporte
+-- AUTOR: Luis David Broquis
+-- FECHA: Abril 2026
+-- ================================================
+
+-- PREGUNTA 1: ¿Qué zona portuaria mueve más carga?
+SELECT 
+    ZONA_PORTUARIA,
+    SUM(EXPORTACION + IMPORTACION) AS TOTAL_TONELADAS
+FROM trafico_portuario
+GROUP BY ZONA_PORTUARIA
+ORDER BY TOTAL_TONELADAS DESC;
+
+-- PREGUNTA 2: ¿Qué tipo de carga predomina?
+SELECT 
+    TIPO_DE_CARGA,
+    SUM(EXPORTACION + IMPORTACION) AS TOTAL_TONELADAS
+FROM trafico_portuario
+GROUP BY TIPO_DE_CARGA
+ORDER BY TOTAL_TONELADAS DESC;
+
+-- PREGUNTA 3: Evolución anual del tráfico
+SELECT 
+    ANO_VIGENCIA,
+    SUM(EXPORTACION) AS TOTAL_EXPORTACION,
+    SUM(IMPORTACION) AS TOTAL_IMPORTACION,
+    SUM(EXPORTACION + IMPORTACION) AS TOTAL_GENERAL
+FROM trafico_portuario
+GROUP BY ANO_VIGENCIA
+ORDER BY ANO_VIGENCIA ASC;
+
+-- PREGUNTA 4: ¿En qué mes hay más actividad?
+SELECT 
+    MES_VIGENCIA,
+    SUM(EXPORTACION + IMPORTACION) AS TOTAL_TONELADAS
+FROM trafico_portuario
+GROUP BY MES_VIGENCIA
+ORDER BY MES_VIGENCIA ASC;
+
+-- PREGUNTA 5: Top 10 sociedades portuarias por comercio exterior
+SELECT 
+    SOCIEDAD_PORTUARIA,
+    SUM(EXPORTACION) AS TOTAL_EXPORTACION,
+    SUM(IMPORTACION) AS TOTAL_IMPORTACION,
+    SUM(EXPORTACION + IMPORTACION) AS COMERCIO_EXTERIOR
+FROM trafico_portuario
+WHERE TIPO_DE_SERVICIO = 'PUBLICO'
+GROUP BY SOCIEDAD_PORTUARIA, TIPO_DE_SERVICIO
+ORDER BY COMERCIO_EXTERIOR DESC
+LIMIT 10;
