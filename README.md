@@ -1,5 +1,7 @@
 Análisis de Tráfico Portuario Marítimo — Colombia 2018-2025 (Versión Actualizada)
+
 Descripción
+
 Proyecto de análisis de datos sobre el tráfico portuario marítimo de Colombia, utilizando el dataset oficial de la Superintendencia de Transporte. En esta versión se realizó un proceso de ETL completo, corrigiendo inconsistencias de carga y asegurando la integridad de los 9,111 registros.
 
 Herramientas utilizadas
